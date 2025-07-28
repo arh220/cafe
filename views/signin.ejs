@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+
+        <title>Signin page</title>
+</head>
+
+<body>
+    <%- include("./partials/nav.ejs") %>
+        <section class="home-slider owl-carousel">
+
+            <div class="slider-item" style="background-image: url(images/bg_3.jpg);"
+                data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row slider-text justify-content-center align-items-center">
+
+                        <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                            <h1 class="mb-3 mt-5 bread">Sign In</h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span>
+                                <span>Sign in</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-intro" style="min-height: 100vh; display: flex; align-items: center;">
+            <div class="container-wrap w-100">
+                <div class="d-flex justify-content-center w-100">
+                    <div class="book p-4 w-100" style="max-width: 600px;">
+                        <% if (error) { %>
+                            <div class="alert alert-danger text-center">
+                                <%= error %>
+                            </div>
+                            <% } %>
+                                <h3 class="text-center mb-4">Sign In</h3>
+                                <form action="/signin" method="post" class="appointment-form">
+                                    <div class="d-md-flex mb-3">
+                                        <div class="form-group w-100 mr-md-2">
+                                            <input type="email" name="email" class="form-control" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="d-md-flex mb-3">
+                                        <div class="form-group w-100 ml-md-2">
+                                            <input type="password" name="pass" class="form-control"
+                                                placeholder="PassWord">
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="submit" value="Sign in" class="btn btn-white py-3 px-4">
+                                    </div>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+</body>
+
+</html>
