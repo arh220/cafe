@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const userRouter = require("./routers/user/userRouter");
+const adminRouter = require("./routers/admin/adminRouter");
 const { error } = require("console");
 const cookieParser = require("cookie-parser");
 const { everypageinuser } = require("./middleware/globaldata");
@@ -23,6 +24,7 @@ app.use(checkForAuthCookie("token"));
 app.use(everypageinuser);
 
 app.use("/", userRouter);
+app.use("/admin", adminRouter);
 app.listen(PORT, () => {
   console.log("server started...");
 });
