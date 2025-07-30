@@ -14,7 +14,7 @@ async function signupUser(req, res) {
     city,
     dob,
     gender,
-    image: `/images/signinuserprofile/${req.file?.filename || "default.png"}`
+    image: `/images/allimages/${req.file?.filename || "default.png"}`
   });
   res.render("signin");
 }

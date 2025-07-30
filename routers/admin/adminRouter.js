@@ -1,6 +1,14 @@
 const express = require("express");
 const { createMenuCategory, getAllMenuCategories, deleteMenuCategory } = require("../../controllers/admin/menucatcreate");
-const { getmenuPage } = require("../../controllers/admin/menu");
+const {
+  getmenuPage,
+  createMenuItem,
+  getAllMenuItems,
+  editMenupg,
+  updateMenuItem,
+  deleteMenuItem
+} = require("../../controllers/admin/menu");
+const uploads = require("../../middleware/multer");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -14,4 +22,10 @@ router.get("/getmenucat", getAllMenuCategories);
 router.get("/delcat/:id", deleteMenuCategory);
 
 router.get("/menupg", getmenuPage);
+router.post("/createitem", uploads.single("image"), createMenuItem);
+router.get("/manuitems", getAllMenuItems);
+router.get("/edititem/:id", editMenupg);
+router.post("/updateitem/:id", uploads.single("image"), updateMenuItem);
+router.get("/delitem/:id", deleteMenuItem);
+
 module.exports = router;

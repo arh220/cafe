@@ -2,14 +2,15 @@ const express = require("express");
 const { signupUser } = require("../../controllers/user/signup");
 const signinUser = require("../../controllers/user/signin");
 const uploads = require("../../middleware/multer");
+const { getAllmenu, getMenuList, addItemInCart } = require("../../controllers/user/menu");
 const router = express.Router();
 
 router.get("/", (req, res) => {
   res.render("home");
 });
-router.get("/menu", (req, res) => {
-  res.render("menu");
-});
+router.get("/menu", getMenuList);
+router.get("/product", getAllmenu);
+
 router.get("/services", (req, res) => {
   res.render("services");
 });
@@ -33,5 +34,5 @@ router.post("/signin", signinUser);
 router.get("/signout", (req, res) => {
   return res.clearCookie("token").redirect("/");
 });
-
+router.get("/cart/:id", addItemInCart);
 module.exports = router;

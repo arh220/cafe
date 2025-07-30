@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
       require: true,
-      default: "./images/siginuserprofile/default.png"
+      default: "./images/allimages/default.png"
     },
     gender: {
       type: String,

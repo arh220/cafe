@@ -3,11 +3,12 @@
 
 <head>
     <%- include("./partials/head.ejs") %>
-        <title>Menu page</title>
+        <title>Product page</title>
 </head>
 
 <body>
     <%- include("./partials/nav.ejs") %>
+
         <section class="home-slider owl-carousel">
 
             <div class="slider-item" style="background-image: url(images/bg_3.jpg);"
@@ -32,7 +33,7 @@
                 <div class="row justify-content-center mb-5">
                     <div class="col-md-7 heading-section text-center ftco-animate">
                         <span class="subheading">Discover</span>
-                        <h2 class="mb-4">Our Menu</h2>
+                        <h2 class="mb-4">Our Products</h2>
                         <p>Far far away …</p>
                     </div>
                 </div>
@@ -64,26 +65,24 @@
                                                 <% allmenu .filter(p=> p.catid && p.catid._id.toString() ===
                                                     cat._id.toString())
                                                     .forEach(prod => { %>
-                                                    <div class="pricing-entry d-flex ftco-animate">
-                                                        <div class="img"
-                                                            style="background-image: url('<%=prod.image %>');"></div>
-                                                        <div class="desc pl-3">
-                                                            <div class="d-flex text align-items-center">
-                                                                <h3><span>
+                                                    <div class="col-md-4 text-center">
+                                                        <div class="menu-wrap">
+                                                            <a href="#" class="menu-img img mb-4"
+                                                                style="background-image: url('<%= prod.image %>');"></a>
+                                                            <div class="text">
+                                                                <h3><a href="#">
                                                                         <%= prod.itemname %>
-                                                                    </span></h3>
-                                                                <span class="price">
-                                                                    <%= prod.mrp %>
-                                                                </span>
-                                                            </div>
-                                                            <div class="d-block">
+                                                                    </a></h3>
                                                                 <p>
                                                                     <%= prod.disc %>
                                                                 </p>
+                                                                <p class="price"><span>₹<%= prod.mrp %></span></p>
+                                                                <p><a href="/admin/cart/<%= prod._id %>"
+                                                                        class="btn btn-primary btn-outline-primary">Add
+                                                                        to cart</a></p>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <% }) %>
                                                         <% if (!allmenu.some(p=> p.catid && p.catid._id.toString() ===
                                                             cat._id.toString())) { %>
@@ -104,10 +103,8 @@
             </div>
         </section>
 
-
         <%- include("./partials/footer.ejs") %>
             <%- include("./partials/script.ejs") %>
-
 </body>
 
 </html>

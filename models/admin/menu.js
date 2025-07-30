@@ -5,7 +5,7 @@ const menuSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "category"
     },
-    proname: {
+    itemname: {
       type: String,
       required: true
     },
