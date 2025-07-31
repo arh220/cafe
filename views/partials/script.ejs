@@ -58,3 +58,37 @@
         });
     });
 </script>
+
+
+<script>
+    $(document).ready(function () {
+        $(".btn-number").click(function () {
+            const row = $(this).closest(".cart-row");
+            const qtyInput = row.find(".quantity");
+            let qty = parseInt(qtyInput.val()) || 1;
+            const unitPrice = parseFloat(row.find(".unit-price").data("price")) || 0;
+            const index = qtyInput.data("index");
+
+            if ($(this).hasClass("plus")) {
+                qty++;
+            } else if ($(this).hasClass("minus") && qty > 1) {
+                qty--;
+            }
+
+            qtyInput.val(qty);
+            const itemTotal = (qty * unitPrice).toFixed(2);
+            row.find(".item-total").text(itemTotal);
+
+            // Update subtotal and grand total
+            let subtotal = 0;
+            $(".item-total").each(function () {
+                subtotal += parseFloat($(this).text()) || 0;
+            });
+
+            $("#subtotalDisplay").text(subtotal.toFixed(2));
+            $("#grandTotal").text((subtotal + 5).toFixed(2));
+
+
+        });
+    });
+</script>
