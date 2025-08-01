@@ -45,7 +45,8 @@
                                 </thead>
                                 <tbody>
                                     <% cartItems.forEach((item, index)=> { %>
-                                        <tr class="text-center cart-row" data-index="<%= index %>">
+                                        <tr class="text-center cart-row" data-index="<%= index %>"
+                                            data-id="<%= item._id %>">
                                             <td class="product-remove">
                                                 <a href="/delcart/<%= item._id %>"><span class="icon-close"></span></a>
                                             </td>
@@ -57,9 +58,6 @@
                                                 <h3>
                                                     <%= item.itemname %>
                                                 </h3>
-                                                <p>
-                                                    <%= item.disc %>
-                                                </p>
                                             </td>
                                             <td class="price">
                                                 <span class="unit-price" data-price="<%= item.mrp %>">₹<%= item.mrp %>
@@ -100,9 +98,6 @@
                             <p class="d-flex">
                                 <span>Delivery</span><span>₹5</span>
                             </p>
-                            <!-- <p class="d-flex">
-                                <span>Discount</span><span>₹0.00</span>
-                            </p> -->
                             <hr>
                             <p class="d-flex total-price">
                                 <span>Total</span> ₹<span id="grandTotal">
@@ -111,7 +106,8 @@
                             </p>
                         </div>
                         <p class="text-center">
-                            <a href="/checkout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
+                            <a href="/checkout" id="checkoutBtn" class="btn btn-primary py-3 px-4">Proceed to
+                                Checkout</a>
                         </p>
                     </div>
                 </div>

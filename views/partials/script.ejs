@@ -15,7 +15,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="/js/google-map.js"></script>
 <script src="/js/main.js"></script>
-
+<!-- DOB-->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const today = new Date().toISOString().split('T')[0];
@@ -39,6 +39,7 @@
         }
     });
 </script>
+<!-- Highlight current page in navbar-->
 <script>
     // Highlight current page in navbar
     document.addEventListener("DOMContentLoaded", function () {
@@ -58,37 +59,56 @@
         });
     });
 </script>
+<!-- cart page -->
 
 
 <script>
-    $(document).ready(function () {
-        $(".btn-number").click(function () {
-            const row = $(this).closest(".cart-row");
-            const qtyInput = row.find(".quantity");
-            let qty = parseInt(qtyInput.val()) || 1;
-            const unitPrice = parseFloat(row.find(".unit-price").data("price")) || 0;
-            const index = qtyInput.data("index");
+    document.addEventListener("DOMContentLoaded", function () {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartBody = document.getElementById("checkoutCartBody");
+        const cartFooter = document.getElementById("checkoutCartFooter");
 
-            if ($(this).hasClass("plus")) {
-                qty++;
-            } else if ($(this).hasClass("minus") && qty > 1) {
-                qty--;
-            }
+        if (cart.length === 0) {
+            cartBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Your cart is empty.</td></tr>`;
+            cartFooter.innerHTML = "";
+            return;
+        }
 
-            qtyInput.val(qty);
-            const itemTotal = (qty * unitPrice).toFixed(2);
-            row.find(".item-total").text(itemTotal);
+        let subtotal = 0;
+        const delivery = 5;
 
-            // Update subtotal and grand total
-            let subtotal = 0;
-            $(".item-total").each(function () {
-                subtotal += parseFloat($(this).text()) || 0;
-            });
+        cartBody.innerHTML = cart.map(item => {
+            const total = item.qty * item.mrp;
+            subtotal += total;
+            return `
+                <tr class="border-bottom border-secondary align-middle">
+                    <td class="ps-2 text-start">
+                        <img src="${item.image}" alt="${item.itemname}" class="img-fluid rounded" style="width: 30px; height: 30px; object-fit: cover;">
+                    </td>
+                    <td class="ps-2 text-start">${item.itemname}</td>
+                    <td class="text-center">${item.qty}</td>
+                    <td class="text-end pe-2">₹${item.mrp}</td>
+                    <td class="text-end pe-2">₹${total}</td>
+                </tr>
+            `;
+        }).join("");
 
-            $("#subtotalDisplay").text(subtotal.toFixed(2));
-            $("#grandTotal").text((subtotal + 5).toFixed(2));
-
-
-        });
+        cartFooter.innerHTML = `
+            <tr class="border-bottom border-secondary">
+                <td colspan="3"></td>
+                <td class="text-end pe-2"><strong>Subtotal:</strong></td>
+                <td class="text-end pe-2">₹${subtotal.toFixed(2)}</td>
+            </tr>
+            <tr class="border-bottom border-secondary">
+                <td colspan="3"></td>
+                <td class="text-end pe-2"><strong>Shipping:</strong></td>
+                <td class="text-end pe-2">₹${delivery.toFixed(2)}</td>
+            </tr>
+            <tr class="border-bottom border-secondary">
+                <td colspan="3"></td>
+                <td class="text-end pe-2"><strong>Total:</strong></td>
+                <td class="text-end pe-2">₹${(subtotal + delivery).toFixed(2)}</td>
+            </tr>
+        `;
     });
 </script>

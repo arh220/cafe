@@ -8,8 +8,7 @@ const {
   addItemInCart,
   showCart,
   removeFromCart,
-  checkoutPage,
-  updateCartQty
+  checkoutPage
 } = require("../../controllers/user/menu");
 const router = express.Router();
 
@@ -46,4 +45,5 @@ router.get("/cart/:id", addItemInCart);
 router.get("/cart", showCart);
 router.get("/delcart/:id", removeFromCart);
 router.get("/checkout", checkoutPage);
+
 module.exports = router;

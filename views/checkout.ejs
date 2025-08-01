@@ -34,7 +34,35 @@
                     <div class="col-xl-8 ftco-animate">
                         <form action="#" class="billing-form ftco-bg-dark p-3 p-md-5">
                             <h3 class="mb-4 billing-heading">Billing Details</h3>
-                            <div class="row align-items-end">
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <div class="ftco-bg-dark p-3 p-md-4" style="overflow-x:auto; border-radius: 5px;">
+                                        <table
+                                            style="width: 100%; border-collapse: collapse; font-size: 13px; color: #eee;">
+                                            <thead class="table-dark small">
+                                                <tr class="border-bottom border-secondary">
+                                                    <th class="ps-2 text-start w-20">Img</th>
+                                                    <th class="ps-2 text-start w-30">Item</th>
+                                                    <th class="px-2 text-center w-20">Qty</th>
+                                                    <th class="pe-2 text-end w-15">Price</th>
+                                                    <th class="pe-2 text-end w-15">Total</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="small" id="checkoutCartBody">
+                                                <!-- Filled dynamically with JS -->
+                                            </tbody>
+                                            <tfoot class="small" id="checkoutCartFooter">
+                                                <!-- Totals will be added here -->
+                                            </tfoot>
+
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-end mt-5">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="firstname">Firt Name</label>
@@ -116,68 +144,49 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
 
-
-                        <div class="row mt-5 pt-3 d-flex">
-                            <div class="col-md-6 d-flex">
-                                <div class="cart-detail cart-total ftco-bg-dark p-3 p-md-4">
-                                    <h3 class="billing-heading mb-4">Cart Total</h3>
-                                    <% if (cart.length===0) { %>
-                                        <p>Your cart is empty.</p>
-                                        <% } else { %>
-                                            <p class="d-flex"><span>Subtotal</span><span>₹<%= subtotal %></span></p>
-                                            <p class="d-flex"><span>Delivery</span><span>₹<%= delivery %></span></p>
-                                            <p class="d-flex total-price"><span>Total</span><span>₹<%= total %></span>
-                                            </p>
-                                            <% } %>
-
-
+                            <div class="row mt-2 pt-3 justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="cart-detail ftco-bg-dark p-3 p-md-4">
+                                        <h3 class="billing-heading mb-4">Payment Method</h3>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="radio">
+                                                    <label><input type="radio" name="optradio" class="mr-2"> Direct Bank
+                                                        Tranfer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="radio">
+                                                    <label><input type="radio" name="optradio" class="mr-2"> Check
+                                                        Payment</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="radio">
+                                                    <label><input type="radio" name="optradio" class="mr-2">
+                                                        Paypal</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="" class="mr-2"> I have read and
+                                                        accept the terms and conditions</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="cart-detail ftco-bg-dark p-3 p-md-4">
-                                    <h3 class="billing-heading mb-4">Payment Method</h3>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" class="mr-2"> Direct Bank
-                                                    Tranfer</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" class="mr-2"> Check
-                                                    Payment</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" value="" class="mr-2"> I have read and
-                                                    accept the terms and conditions</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
+                        </form><!-- END -->
+                    </div> <!-- .col-md-8 -->
                     <div class="col-xl-4 sidebar ftco-animate">
                         <div class="sidebar-box">
                             <form action="#" class="search-form">
@@ -265,8 +274,62 @@
 
                 </div>
             </div>
-        </section>
+        </section> <!-- .section -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const cartBody = document.getElementById("checkoutCartBody");
+                const cartFooter = document.getElementById("checkoutCartFooter");
 
+                const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+
+                if (cartData.length === 0) {
+                    cartBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Your cart is empty.</td></tr>`;
+                    cartFooter.innerHTML = '';
+                    return;
+                }
+
+                let subtotal = 0;
+
+                const rows = cartData.map(item => {
+                    const total = item.qty * item.mrp;
+                    subtotal += total;
+
+                    return `
+                <tr class="border-bottom border-secondary align-middle">
+                    <td class="ps-2 text-start">
+                        <img src="${item.image}" alt="${item.itemname}" class="img-fluid rounded" style="width: 30px; height: 30px; object-fit: cover;">
+                    </td>
+                    <td class="ps-2 text-start">${item.itemname}</td>
+                    <td class="text-center">${item.qty}</td>
+                    <td class="text-end pe-2">₹${item.mrp}</td>
+                    <td class="text-end pe-2">₹${total}</td>
+                </tr>
+            `;
+                }).join('');
+
+                const delivery = 5;
+                const grandTotal = subtotal + delivery;
+
+                cartBody.innerHTML = rows;
+                cartFooter.innerHTML = `
+            <tr class="border-bottom border-secondary">
+                <td colspan="3"></td>
+                <td class="text-end pe-2"><strong>Subtotal:</strong></td>
+                <td class="text-end pe-2">₹${subtotal.toFixed(2)}</td>
+            </tr>
+            <tr class="border-bottom border-secondary">
+                <td colspan="3"></td>
+                <td class="text-end pe-2"><strong>Shipping:</strong></td>
+                <td class="text-end pe-2">₹${delivery.toFixed(2)}</td>
+            </tr>
+            <tr class="border-bottom border-secondary">
+                <td colspan="3"></td>
+                <td class="text-end pe-2"><strong>Total:</strong></td>
+                <td class="text-end pe-2">₹${grandTotal.toFixed(2)}</td>
+            </tr>
+        `;
+            });
+        </script>
         <%- include("./partials/footer.ejs") %>
             <%- include("./partials/script.ejs") %>
 </body>

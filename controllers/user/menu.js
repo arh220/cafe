@@ -18,7 +18,6 @@ async function addItemInCart(req, res) {
   if (!req.session.cart) {
     req.session.cart = [];
   }
-  // console.log("Adding to cart:", product.itemname);
   const existingItem = req.session.cart.find(item => item._id == prodId);
 
   if (existingItem) {
@@ -33,7 +32,6 @@ async function addItemInCart(req, res) {
       qty: 1
     });
   }
-  // console.log("Cart after adding:", req.session.cart);
   res.redirect("/cart");
 }
 function showCart(req, res) {
