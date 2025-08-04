@@ -31,79 +31,84 @@
 
 
 
-        <section class="ftco-intro" style="min-height: 100vh; display: flex; align-items: center;">
-            <div class="container-wrap w-100">
-                <div class="d-flex justify-content-center w-100">
-                    <div class="book p-4 w-100" style="max-width: 600px;">
-                        <% if (error) { %>
-                            <div class="alert alert-danger text-center">
-                                <%= error %>
-                            </div>
-                            <% } %>
-                                <h3 class="text-center mb-4">Sign Up</h3>
-                                <form action="/signup" method="post" enctype="multipart/form-data"
-                                    class="appointment-form">
-                                    <div class="d-md-flex mb-3">
-                                        <div class="form-group w-100 mr-md-2">
-                                            <input type="text" name="name" class="form-control" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="d-md-flex mb-3">
-                                        <div class="form-group w-100 mr-md-2">
-                                            <input type="email" name="email" class="form-control" placeholder="Email">
-                                        </div>
+        <div class="invoice-wrapper mt-5">
+            <div class="invoice-header">
+                <h1>Thank You For Your Order!</h1>
+                <p>We appreciate your purchase.</p>
+            </div>
 
-                                        <div class="form-group w-100 ml-md-2">
-                                            <input type="password" name="pass" class="form-control"
-                                                placeholder="PassWord">
-                                        </div>
-                                    </div>
-                                    <div class="d-md-flex mb-3">
-                                        <div class="form-group w-100 mr-md-2">
-                                            <input type="tel" name="mo" class="form-control" placeholder="Mobile"
-                                                maxlength="10" pattern="[0-9]{10}" id="mobile">
-                                        </div>
-                                        <div class="form-group w-100 ml-md-2">
-                                            <input type="text" name="City" class="form-control" placeholder="City">
-                                        </div>
-                                    </div>
-                                    <div class="d-md-flex mb-3">
-                                        <div class="form-group w-100 mr-md-2">
-                                            <input type="date" name="dob" id="dob" class="form-control custom-date"
-                                                placeholder="Date Of Birth">
-                                        </div>
-                                        <div class="form-group w-100 ml-md-2">
-                                            <input type="file" name="image" class="form-control" placeholder="Profile">
-                                        </div>
-                                    </div>
-                                    <div class="d-md-flex mb-3">
-                                        <div class="form-group w-100 ml-md-2 d-flex align-items-center">
-                                            <label class="mr-3 mb-0">Gender:</label>
-                                            <div class="form-check mr-3">
-                                                <input class="form-check-input" type="radio" name="gender" id="male"
-                                                    value="male">
-                                                <label class="form-check-label" for="male">Male</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="female"
-                                                    value="female">
-                                                <label class="form-check-label" for="female">Female</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group text-center">
-                                        <input type="submit" value="Sign Up" class="btn btn-white py-3 px-4">
-                                    </div>
-                                </form>
-                                <div class="text-center mt-3">
-                                    <a href="/signin">Sign in</a>
-                                </div>
-                    </div>
+            <div class="customer-info">
+                <div class="section-title">Customer Details</div>
+                <div class="info-row">
+                    <p><strong>Name:</strong>
+                        <%= order.name %>
+                    </p>
+                    <p><strong>Email:</strong>
+                        <%= order.email %>
+                    </p>
+                    <p><strong>Phone:</strong>
+                        <%= order.mo %>
+                    </p>
+                    <p><strong>Address:</strong>
+                        <%= order.addre %>, <%= order.city %> - <%= order.pincode %>
+                    </p>
                 </div>
             </div>
-        </section>
 
+            <div class="order-summary">
+                <div class="section-title">Order Summary</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price (₹)</th>
+                            <th>Qty</th>
+                            <th class="text-right">Total (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% order.cartItems.forEach(item=> { %>
+                            <tr>
+                                <td>
+                                    <%= item.name %>
+                                </td>
+                                <td>
+                                    <%= item.price.toFixed(2) %>
+                                </td>
+                                <td>
+                                    <%= item.quantity %>
+                                </td>
+                                <td class="text-right">
+                                    <%= item.total.toFixed(2) %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                    <tfoot>
+                        <tr class="summary-footer">
+                            <td colspan="3">Subtotal</td>
+                            <td class="text-right">₹<%= order.subtotal.toFixed(2) %>
+                            </td>
+                        </tr>
+                        <tr class="summary-footer">
+                            <td colspan="3">Shipping</td>
+                            <td class="text-right">₹<%= order.shipping.toFixed(2) %>
+                            </td>
+                        </tr>
+                        <tr class="summary-footer">
+                            <td colspan="3">Grand Total</td>
+                            <td class="text-right">₹<%= order.grandTotal.toFixed(2) %>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="btn-container">
+                <a href="/" class="btn border-secondary px-4 py-3 text-primary text-uppercase mb-4 ms-4 w-100">Continue
+                    Shopping</a>
+            </div>
+        </div>
 
         <%- include("./partials/footer.ejs") %>
             <%- include("./partials/script.ejs") %>

@@ -2,14 +2,7 @@ const express = require("express");
 const { signupUser } = require("../../controllers/user/signup");
 const signinUser = require("../../controllers/user/signin");
 const uploads = require("../../middleware/multer");
-const {
-  getAllmenu,
-  getMenuList,
-  addItemInCart,
-  showCart,
-  removeFromCart,
-  checkoutPage
-} = require("../../controllers/user/menu");
+const { getAllmenu, getMenuList, showCart, checkoutPage, placeorder } = require("../../controllers/user/menu");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -41,9 +34,8 @@ router.post("/signin", signinUser);
 router.get("/signout", (req, res) => {
   return res.clearCookie("token").redirect("/");
 });
-router.get("/cart/:id", addItemInCart);
 router.get("/cart", showCart);
-router.get("/delcart/:id", removeFromCart);
 router.get("/checkout", checkoutPage);
+router.post("/placeorder", placeorder);
 
 module.exports = router;

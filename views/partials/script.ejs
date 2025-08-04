@@ -60,55 +60,157 @@
     });
 </script>
 <!-- cart page -->
-
-
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    function renderCartFromLocalStorage() {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const cartBody = document.getElementById("checkoutCartBody");
-        const cartFooter = document.getElementById("checkoutCartFooter");
+        const cartBody = document.getElementById("cartBody");
+        cartBody.innerHTML = "";
+
+        let subtotal = 0;
 
         if (cart.length === 0) {
-            cartBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Your cart is empty.</td></tr>`;
-            cartFooter.innerHTML = "";
+            cartBody.innerHTML = '<tr><td colspan="6" class="text-center text-white">Cart is empty</td></tr>';
+            document.getElementById("subtotalDisplay").textContent = "0.00";
+            document.getElementById("grandTotal").textContent = "5.00";
             return;
         }
 
-        let subtotal = 0;
-        const delivery = 5;
-
-        cartBody.innerHTML = cart.map(item => {
-            const total = item.qty * item.mrp;
+        cart.forEach(item => {
+            const total = item.qty * item.price;
             subtotal += total;
-            return `
-                <tr class="border-bottom border-secondary align-middle">
-                    <td class="ps-2 text-start">
-                        <img src="${item.image}" alt="${item.itemname}" class="img-fluid rounded" style="width: 30px; height: 30px; object-fit: cover;">
-                    </td>
-                    <td class="ps-2 text-start">${item.itemname}</td>
-                    <td class="text-center">${item.qty}</td>
-                    <td class="text-end pe-2">₹${item.mrp}</td>
-                    <td class="text-end pe-2">₹${total}</td>
-                </tr>
-            `;
-        }).join("");
 
-        cartFooter.innerHTML = `
-            <tr class="border-bottom border-secondary">
-                <td colspan="3"></td>
-                <td class="text-end pe-2"><strong>Subtotal:</strong></td>
-                <td class="text-end pe-2">₹${subtotal.toFixed(2)}</td>
-            </tr>
-            <tr class="border-bottom border-secondary">
-                <td colspan="3"></td>
-                <td class="text-end pe-2"><strong>Shipping:</strong></td>
-                <td class="text-end pe-2">₹${delivery.toFixed(2)}</td>
-            </tr>
-            <tr class="border-bottom border-secondary">
-                <td colspan="3"></td>
-                <td class="text-end pe-2"><strong>Total:</strong></td>
-                <td class="text-end pe-2">₹${(subtotal + delivery).toFixed(2)}</td>
+            const row = `
+            <tr class="text-center">
+                <td class="product-remove">
+                    <a href="#" onclick="removeItem('${item.id}')"><span class="icon-close"></span></a>
+                </td>
+                <td class="image-prod">
+                    <div class="img" style="background-image:url('${item.image}');"></div>
+                </td>
+                <td class="product-name">
+                    <h3>${item.itemname}</h3>
+                </td>
+                <td class="price">₹${item.price}</td>
+                <td class="quantity">
+                    <div class="input-group mb-3">
+                        <button class="btn-number" onclick="changeQty('${item.id}', -1)">−</button>
+                        <input type="text" class="form-control text-center" value="${item.qty}" readonly>
+                        <button class="btn-number" onclick="changeQty('${item.id}', 1)">+</button>
+                    </div>
+                </td>
+                <td class="total">₹<span class="item-total">${total.toFixed(2)}</span></td>
             </tr>
         `;
+
+            cartBody.insertAdjacentHTML("beforeend", row);
+        });
+
+        document.getElementById("subtotalDisplay").textContent = subtotal.toFixed(2);
+        document.getElementById("grandTotal").textContent = (subtotal + 50).toFixed(2);
+    }
+
+    function changeQty(id, delta) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.qty = Math.max(1, item.qty + delta);
+            item.total = item.qty * item.price;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCartFromLocalStorage();
+        }
+    }
+
+    function removeItem(id) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCartFromLocalStorage();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderCartFromLocalStorage);
+</script>
+<script>
+    function addToCart(newItem) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const existing = cart.find(item => item.id === newItem.id);
+        if (existing) {
+            existing.qty += newItem.qty;
+            existing.total = existing.qty * existing.price;
+        } else {
+            newItem.total = newItem.qty * newItem.price;
+            cart.push(newItem);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Product added to cart!");
+        window.location.href = "/cart";  // auto-redirect to cart
+    }
+</script>
+<script>
+    function renderCheckout() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (!Array.isArray(cart)) {
+            // Agar single object hai to array me convert karo
+            cart = [cart];
+        }
+
+        const deliveryCharge = 50;
+
+        if (cart.length === 0) {
+            document.getElementById("checkoutCartBody").innerHTML = `
+        <tr>
+          <td colspan="5" class="text-center text-muted">Your cart is empty.</td>
+        </tr>
+      `;
+            document.getElementById("checkoutCartFooter").innerHTML = "";
+            return;
+        }
+
+        let tbody = "";
+        let totalAmount = 0;
+
+        cart.forEach(item => {
+            const qty = item.qty || 1;
+            const price = parseFloat(item.price) || 0;
+            const total = qty * price;
+
+            tbody += `
+        <tr>
+          <td><img src="${item.image}" style="width: 50px; height: 50px; object-fit: cover;"></td>
+          <td>${item.itemname}</td>
+          <td class="text-center">${qty}</td>
+          <td class="text-end">₹${price.toFixed(2)}</td>
+          <td class="text-end">₹${total.toFixed(2)}</td>
+        </tr>
+      `;
+
+            totalAmount += total;
+        });
+
+        // Grand total including delivery charge
+        const grandTotal = totalAmount + deliveryCharge;
+
+        document.getElementById("checkoutCartBody").innerHTML = tbody;
+        document.getElementById("checkoutCartFooter").innerHTML = `
+      <tr class="border-top border-secondary">
+        <td colspan="4" class="text-end fw-bold">Subtotal</td>
+        <td class="text-end fw-bold">₹${totalAmount.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-end fw-bold">Delivery Charge</td>
+        <td class="text-end fw-bold">₹${deliveryCharge.toFixed(2)}</td>
+      </tr>
+      <tr class="border-top border-secondary">
+        <td colspan="4" class="text-end fw-bold">Grand Total</td>
+        <td class="text-end fw-bold">₹${grandTotal.toFixed(2)}</td>
+      </tr>
+    `;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("Cart from localStorage:", localStorage.getItem("cart")); // Debugging ke liye
+        renderCheckout();
     });
 </script>

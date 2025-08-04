@@ -1,5 +1,6 @@
 const Menu = require("../../models/admin/menu");
 const Menucategory = require("../../models/admin/menucat");
+const Order = require("../../models/order");
 
 async function getAllmenu(req, res) {
   const allmenu = await Menu.find().populate("catid");
@@ -11,61 +12,44 @@ async function getMenuList(req, res) {
   const allcat = await Menucategory.find();
   res.render("menu", { allmenu, allcat });
 }
-async function addItemInCart(req, res) {
-  const prodId = req.params.id;
-  const product = await Menu.findById(prodId);
 
-  if (!req.session.cart) {
-    req.session.cart = [];
-  }
-  const existingItem = req.session.cart.find(item => item._id == prodId);
-
-  if (existingItem) {
-    existingItem.qty += 1;
-  } else {
-    req.session.cart.push({
-      _id: product._id,
-      itemname: product.itemname,
-      mrp: Number(product.mrp),
-      disc: product.disc,
-      image: product.image,
-      qty: 1
-    });
-  }
-  res.redirect("/cart");
-}
 function showCart(req, res) {
-  const cartItems = req.session.cart || [];
-
-  let subtotal = 0;
-  cartItems.forEach(item => {
-    subtotal += item.mrp * item.qty;
-  });
-
-  const delivery = 5;
-  const total = subtotal + delivery;
-
-  res.render("cart", { cartItems, subtotal, delivery, total });
+  res.render("cart", { cartItems: [], subtotal: 0, delivery: 0, total: 0 });
 }
-function removeFromCart(req, res) {
-  const prodId = req.params.id;
-  if (req.session.cart) {
-    req.session.cart = req.session.cart.filter(item => item._id != prodId);
-  }
-  res.redirect("/cart");
-}
+
 async function checkoutPage(req, res) {
-  const cart = req.session.cart || [];
+  res.render("checkout", { cart: [], subtotal: 0, delivery: 0, total: 0 });
+}
+async function placeorder(req, res) {
+  const { name, mo, email, stnm, apnm, city, pin, payment, cartData } = req.body;
+  // console.log(req.body);
 
-  let subtotal = 0;
-  cart.forEach(item => {
-    subtotal += Number(item.mrp) * Number(item.qty);
+  let cartItems = [];
+  if (cartData) {
+    cartItems = JSON.parse(cartData);
+  }
+  const subtotal = cartItems.reduce((sum, item) => sum + (item.total || 0), 0);
+  const deliveryCharge = 50;
+  const grandTotal = subtotal + deliveryCharge;
+
+  const newOrder = new Order({
+    name,
+    mo,
+    email,
+    stnm,
+    apnm,
+    city,
+    pin,
+    payment,
+    cartItem: cartItems,
+    subtotal,
+    deliveryCharge,
+    grandTotal
   });
 
-  const delivery = 5;
-  const total = subtotal + delivery;
+  const orders = await newOrder.save();
 
-  res.render("checkout", { cart, subtotal, delivery, total });
+  res.render("ordersucsess", { orders });
 }
 
-module.exports = { getAllmenu, getMenuList, addItemInCart, showCart, removeFromCart, checkoutPage };
+module.exports = { getAllmenu, getMenuList, showCart, checkoutPage, placeorder };

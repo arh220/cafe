@@ -32,77 +32,67 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-8 ftco-animate">
-                        <form action="#" class="billing-form ftco-bg-dark p-3 p-md-5">
+                        <form id="orderForm" action="/placeorder" method="post"
+                            class="billing-form ftco-bg-dark p-3 p-md-5">
                             <h3 class="mb-4 billing-heading">Billing Details</h3>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <div class="ftco-bg-dark p-3 p-md-4" style="overflow-x:auto; border-radius: 5px;">
-                                        <table
-                                            style="width: 100%; border-collapse: collapse; font-size: 13px; color: #eee;">
+                                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
                                             <thead class="table-dark small">
                                                 <tr class="border-bottom border-secondary">
                                                     <th class="ps-2 text-start w-20">Img</th>
                                                     <th class="ps-2 text-start w-30">Item</th>
                                                     <th class="px-2 text-center w-20">Qty</th>
-                                                    <th class="pe-2 text-end w-15">Price</th>
+                                                    <th class="pe-2 text-end w-15">MRP</th>
                                                     <th class="pe-2 text-end w-15">Total</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody class="small" id="checkoutCartBody">
-                                                <!-- Filled dynamically with JS -->
+                                                <!-- Filled by JS -->
                                             </tbody>
                                             <tfoot class="small" id="checkoutCartFooter">
-                                                <!-- Totals will be added here -->
+                                                <!-- Totals by JS -->
                                             </tfoot>
-
-
                                         </table>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row align-items-end mt-5">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="firstname">Firt Name</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="lastname">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <label for="firstname">Name</label>
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Enter Youre Name">
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="country">State / Country</label>
-                                        <div class="select-wrap">
-                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                            <select name="" id="" class="form-control">
-                                                <option value="">France</option>
-                                                <option value="">Italy</option>
-                                                <option value="">Philippines</option>
-                                                <option value="">South Korea</option>
-                                                <option value="">Hongkong</option>
-                                                <option value="">Japan</option>
-                                            </select>
-                                        </div>
+                                        <label for="phone">Phone</label>
+                                        <input type="text" name="mo" class="form-control"
+                                            placeholder="Enter Youre Mobile">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="emailaddress">Email Address</label>
+                                        <input type="text" value="<%= signinuser.email %>" name="email"
+                                            class="form-control" placeholder="">
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="streetaddress">Street Address</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" name="stnm" class="form-control"
                                             placeholder="House number and street name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control"
+                                        <input type="text" name="apnm" class="form-control"
                                             placeholder="Appartment, suite, unit etc: (optional)">
                                     </div>
                                 </div>
@@ -110,41 +100,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="towncity">Town / City</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" name="city" class="form-control"
+                                            placeholder="Enter Youre Town / City">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="postcodezip">Postcode / ZIP *</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="w-100"></div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="phone">Phone</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="emailaddress">Email Address</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="w-100"></div>
-                                <div class="col-md-12">
-                                    <div class="form-group mt-4">
-                                        <div class="radio">
-                                            <label class="mr-3"><input type="radio" name="optradio"> Create an Account?
-                                            </label>
-                                            <label><input type="radio" name="optradio"> Ship to different
-                                                address</label>
-                                        </div>
+                                        <input type="text" name="pin" class="form-control"
+                                            placeholder="Enter Youre Postcode / Zip">
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row mt-2 pt-3 justify-content-center">
                                 <div class="col-md-6">
                                     <div class="cart-detail ftco-bg-dark p-3 p-md-4">
@@ -152,7 +119,8 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio" class="mr-2"> Direct Bank
+                                                    <label><input type="radio" name="payment" value="Direct Bank
+                                                        Tranfer" class="mr-2"> Direct Bank
                                                         Tranfer</label>
                                                 </div>
                                             </div>
@@ -160,7 +128,8 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio" class="mr-2"> Check
+                                                    <label><input type="radio" value="Check Payment" name="payment"
+                                                            class="mr-2"> Check
                                                         Payment</label>
                                                 </div>
                                             </div>
@@ -168,7 +137,8 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio" class="mr-2">
+                                                    <label><input type="radio" value="Paypal" name="payment"
+                                                            class="mr-2">
                                                         Paypal</label>
                                                 </div>
                                             </div>
@@ -180,156 +150,116 @@
                                                         accept the terms and conditions</label>
                                                 </div>
                                             </div>
+                                            <div class="text-end mt-4">
+                                                <button type="submit" class="btn btn-primary">Place Order</button>
+                                            </div>
                                         </div>
-                                        <p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
                                     </div>
-                                </div>
-                            </div>
+                                    <input type="hidden" name="cartData" id="cartData" value="">
                         </form><!-- END -->
                     </div> <!-- .col-md-8 -->
-                    <div class="col-xl-4 sidebar ftco-animate">
-                        <div class="sidebar-box">
-                            <form action="#" class="search-form">
-                                <div class="form-group">
-                                    <div class="icon">
-                                        <span class="icon-search"></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="sidebar-box ftco-animate">
-                            <div class="categories">
-                                <h3>Categories</h3>
-                                <li><a href="#">Tour <span>(12)</span></a></li>
-                                <li><a href="#">Hotel <span>(22)</span></a></li>
-                                <li><a href="#">Coffee <span>(37)</span></a></li>
-                                <li><a href="#">Drinks <span>(42)</span></a></li>
-                                <li><a href="#">Foods <span>(14)</span></a></li>
-                                <li><a href="#">Travel <span>(140)</span></a></li>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-box ftco-animate">
-                            <h3>Recent Blog</h3>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                <div class="text">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
-                                            the blind texts</a></h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                <div class="text">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
-                                            the blind texts</a></h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                <div class="text">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
-                                            the blind texts</a></h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-box ftco-animate">
-                            <h3>Tag Cloud</h3>
-                            <div class="tagcloud">
-                                <a href="#" class="tag-cloud-link">dish</a>
-                                <a href="#" class="tag-cloud-link">menu</a>
-                                <a href="#" class="tag-cloud-link">food</a>
-                                <a href="#" class="tag-cloud-link">sweet</a>
-                                <a href="#" class="tag-cloud-link">tasty</a>
-                                <a href="#" class="tag-cloud-link">delicious</a>
-                                <a href="#" class="tag-cloud-link">desserts</a>
-                                <a href="#" class="tag-cloud-link">drinks</a>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-box ftco-animate">
-                            <h3>Paragraph</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
-                                necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa
-                                sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+            <div class="col-xl-4 sidebar ftco-animate">
+                <div class="sidebar-box">
+                    <form action="#" class="search-form">
+                        <div class="form-group">
+                            <div class="icon">
+                                <span class="icon-search"></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <div class="categories">
+                        <h3>Categories</h3>
+                        <li><a href="#">Tour <span>(12)</span></a></li>
+                        <li><a href="#">Hotel <span>(22)</span></a></li>
+                        <li><a href="#">Coffee <span>(37)</span></a></li>
+                        <li><a href="#">Drinks <span>(42)</span></a></li>
+                        <li><a href="#">Foods <span>(14)</span></a></li>
+                        <li><a href="#">Travel <span>(140)</span></a></li>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Recent Blog</h3>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
+                                    the blind texts</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
+                                    the blind texts</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
+                                    the blind texts</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Tag Cloud</h3>
+                    <div class="tagcloud">
+                        <a href="#" class="tag-cloud-link">dish</a>
+                        <a href="#" class="tag-cloud-link">menu</a>
+                        <a href="#" class="tag-cloud-link">food</a>
+                        <a href="#" class="tag-cloud-link">sweet</a>
+                        <a href="#" class="tag-cloud-link">tasty</a>
+                        <a href="#" class="tag-cloud-link">delicious</a>
+                        <a href="#" class="tag-cloud-link">desserts</a>
+                        <a href="#" class="tag-cloud-link">drinks</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Paragraph</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
+                        necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa
+                        sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                </div>
+            </div>
+
+            </div>
+            </div>
         </section> <!-- .section -->
+
+
+
+
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const cartBody = document.getElementById("checkoutCartBody");
-                const cartFooter = document.getElementById("checkoutCartFooter");
-
-                const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-
-                if (cartData.length === 0) {
-                    cartBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Your cart is empty.</td></tr>`;
-                    cartFooter.innerHTML = '';
-                    return;
-                }
-
-                let subtotal = 0;
-
-                const rows = cartData.map(item => {
-                    const total = item.qty * item.mrp;
-                    subtotal += total;
-
-                    return `
-                <tr class="border-bottom border-secondary align-middle">
-                    <td class="ps-2 text-start">
-                        <img src="${item.image}" alt="${item.itemname}" class="img-fluid rounded" style="width: 30px; height: 30px; object-fit: cover;">
-                    </td>
-                    <td class="ps-2 text-start">${item.itemname}</td>
-                    <td class="text-center">${item.qty}</td>
-                    <td class="text-end pe-2">₹${item.mrp}</td>
-                    <td class="text-end pe-2">₹${total}</td>
-                </tr>
-            `;
-                }).join('');
-
-                const delivery = 5;
-                const grandTotal = subtotal + delivery;
-
-                cartBody.innerHTML = rows;
-                cartFooter.innerHTML = `
-            <tr class="border-bottom border-secondary">
-                <td colspan="3"></td>
-                <td class="text-end pe-2"><strong>Subtotal:</strong></td>
-                <td class="text-end pe-2">₹${subtotal.toFixed(2)}</td>
-            </tr>
-            <tr class="border-bottom border-secondary">
-                <td colspan="3"></td>
-                <td class="text-end pe-2"><strong>Shipping:</strong></td>
-                <td class="text-end pe-2">₹${delivery.toFixed(2)}</td>
-            </tr>
-            <tr class="border-bottom border-secondary">
-                <td colspan="3"></td>
-                <td class="text-end pe-2"><strong>Total:</strong></td>
-                <td class="text-end pe-2">₹${grandTotal.toFixed(2)}</td>
-            </tr>
-        `;
+            document.getElementById("orderForm").addEventListener("submit", function (e) {
+                // Submit hone se pehle cart ko hidden input me daalo
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                document.getElementById("cartData").value = JSON.stringify(cart);
             });
         </script>
+
         <%- include("./partials/footer.ejs") %>
             <%- include("./partials/script.ejs") %>
 </body>

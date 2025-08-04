@@ -77,9 +77,16 @@
                                                                     <%= prod.disc %>
                                                                 </p>
                                                                 <p class="price"><span>₹<%= prod.mrp %></span></p>
-                                                                <p><a href="/cart/<%= prod._id %>"
-                                                                        class="btn btn-primary btn-outline-primary">Add
-                                                                        to cart</a></p>
+                                                                <p><a href="/cart"
+                                                                        class="btn btn-primary btn-outline-primary"
+                                                                        onclick='addToCart({
+     id: "<%= prod._id %>",
+     itemname: "<%= prod.itemname %>",
+     price: "<%= prod.mrp %>",
+     image: "<%= prod.image %>",
+     qty: 1
+   }); return true;'>Add to cart</a>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>

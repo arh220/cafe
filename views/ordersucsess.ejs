@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+
+        <title>page</title>
+</head>
+
+<body>
+    <%- include("./partials/nav.ejs") %>
+        <section class="home-slider owl-carousel">
+
+            <div class="slider-item" style="background-image: url(images/bg_3.jpg);"
+                data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row slider-text justify-content-center align-items-center">
+
+                        <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                            <h1 class="mb-3 mt-5 bread">Order Conform</h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span>
+                                <span>Billing</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="d-flex justify-content-center mt-5">
+            <div class="invoice-wrapper mt-5 ">
+                <div class="invoice-header text-center">
+                    <h1>Thank You For Your Order!</h1>
+                    <p>We appreciate your purchase.</p>
+                </div>
+
+                <div class="customer-info">
+                    <div class="section-title">Customer Details</div>
+                    <div class="info-row">
+                        <p><strong>Name:</strong>
+                            <%= orders.name %>
+                        </p>
+                        <p><strong>Email:</strong>
+                            <%= orders.email %>
+                        </p>
+                        <p><strong>Phone:</strong>
+                            <%= orders.mo %>
+                        </p>
+                        <p><strong>Address:</strong>
+                            <%= orders.addre %>, <%= orders.city %> - <%= orders.pincode %>
+                        </p>
+                    </div>
+                </div>
+                <div class="order-summary">
+                    <div class="section-title">Order Summary</div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price (₹)</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Total (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <% orders.cartItem.forEach(item=> { %>
+                                    <tr class="align-middle text-white">
+                                        <td>
+                                            <%= item.itemname %>
+                                        </td>
+                                        <td>₹<%= item.price.toFixed(2) %>
+                                        </td>
+                                        <td>
+                                            <%= item.qty %>
+                                        </td>
+                                        <td>₹<%= item.total.toFixed(2) %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                            <tfoot>
+                                <tr class="align-middle text-white">
+                                    <td colspan="3" class="text-end fw-semibold">Subtotal</td>
+                                    <td>₹<%= orders.subtotal.toFixed(2) %>
+                                    </td>
+                                </tr>
+                                <tr class="align-middle text-white">
+                                    <td colspan="3" class="text-end fw-semibold">Shipping</td>
+                                    <td>₹<%= orders.deliveryCharge.toFixed(2) %>
+                                    </td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td colspan="3" class="text-end fw-bold">Grand Total</td>
+                                    <td>₹<%= orders.grandTotal.toFixed(2) %>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="btn-container">
+                    <a href="/product"
+                        class="btn border-secondary px-4 py-3 text-primary text-uppercase mb-4 ms-4 w-100">Continue
+                        Shopping</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            localStorage.removeItem("cart");
+        </script>
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+</body>
+
+</html>

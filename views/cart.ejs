@@ -43,43 +43,10 @@
                                         <th>Total</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <% cartItems.forEach((item, index)=> { %>
-                                        <tr class="text-center cart-row" data-index="<%= index %>"
-                                            data-id="<%= item._id %>">
-                                            <td class="product-remove">
-                                                <a href="/delcart/<%= item._id %>"><span class="icon-close"></span></a>
-                                            </td>
-                                            <td class="image-prod">
-                                                <div class="img" style="background-image:url('<%= item.image %>');">
-                                                </div>
-                                            </td>
-                                            <td class="product-name">
-                                                <h3>
-                                                    <%= item.itemname %>
-                                                </h3>
-                                            </td>
-                                            <td class="price">
-                                                <span class="unit-price" data-price="<%= item.mrp %>">₹<%= item.mrp %>
-                                                </span>
-                                            </td>
-
-
-                                            <td class="quantity">
-                                                <div class="input-group mb-3">
-                                                    <button type="button" class="btn-number minus">−</button>
-                                                    <input type="text" class="quantity form-control text-center"
-                                                        value="<%= item.qty %>" data-index="<%= index %>">
-                                                    <button type="button" class="btn-number plus">+</button>
-                                                </div>
-                                            </td>
-                                            <td class="total">₹<span class="item-total">
-                                                    <%= item.mrp * item.qty %>
-                                                </span></td>
-
-                                        </tr>
-                                        <% }); %>
+                                <tbody id="cartBody">
+                                    <!-- Items will be injected by JS -->
                                 </tbody>
+
 
                             </table>
                         </div>
@@ -91,18 +58,14 @@
                         <div class="cart-total mb-3">
                             <h3>Cart Totals</h3>
                             <p class="d-flex">
-                                <span>Subtotal</span> ₹<span id="subtotalDisplay">
-                                    <%= subtotal %>
-                                </span>
+                                <span>Subtotal</span> ₹<span id="subtotalDisplay">0.00</span>
                             </p>
                             <p class="d-flex">
-                                <span>Delivery</span><span>₹5</span>
+                                <span>Delivery</span> ₹<span id="delivery">50.00</span>
                             </p>
                             <hr>
                             <p class="d-flex total-price">
-                                <span>Total</span> ₹<span id="grandTotal">
-                                    <%= total %>
-                                </span>
+                                <span>Total</span> ₹<span id="grandTotal">0.00</span>
                             </p>
                         </div>
                         <p class="text-center">
@@ -111,8 +74,10 @@
                         </p>
                     </div>
                 </div>
+
             </div>
         </section>
+        
 
 
         <%- include("./partials/footer.ejs") %>
