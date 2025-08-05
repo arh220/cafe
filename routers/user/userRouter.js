@@ -1,7 +1,7 @@
 const express = require("express");
 const { signupUser } = require("../../controllers/user/signup");
 const signinUser = require("../../controllers/user/signin");
-const uploads = require("../../middleware/multer");
+const upload = require("../../utils/multer");
 const { getAllmenu, getMenuList, showCart, checkoutPage, placeorder } = require("../../controllers/user/menu");
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.get("/contact", (req, res) => {
 router.get("/signup", (req, res) => {
   res.render("signup", { error: null });
 });
-router.post("/signup", uploads.single("image"), signupUser);
+router.post("/signup", upload.single("image"), signupUser);
 router.get("/signin", (req, res) => {
   res.render("signin", { error: null });
 });

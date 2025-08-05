@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const { everypageinuser } = require("./middleware/globaldata");
 const { checkForAuthCookie } = require("./middleware/checkforauth");
 const session = require("express-session");
+const { cloudinaryConfig } = require("./utils/cloudinary");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -19,6 +20,7 @@ mongoose
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views/"));
 app.use(express.static("public"));
+app.use(express.static("uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -39,4 +41,5 @@ app.use("/", userRouter);
 app.use("/admin", adminRouter);
 app.listen(PORT, () => {
   console.log("server started...");
+  cloudinaryConfig();
 });

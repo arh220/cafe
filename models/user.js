@@ -28,8 +28,11 @@ const userSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      require: true,
-      default: "./images/allimages/default.png"
+      require: true
+    },
+    imageId: {
+      type: String,
+      require: true
     },
     gender: {
       type: String,
