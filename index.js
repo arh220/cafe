@@ -34,16 +34,6 @@ app.use(
 );
 app.use(checkForAuthCookie("token"));
 app.use(everypageinuser);
-app.use(
-  session({
-    secret: "arh12345",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24
-    }
-  })
-);
 
 app.use("/", userRouter);
 app.use("/admin", adminRouter);

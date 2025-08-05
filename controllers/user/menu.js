@@ -49,7 +49,7 @@ async function placeorder(req, res) {
 
   const orders = await newOrder.save();
 
-  res.render("ordersucsess", { orders });
+  res.render("ordersucsess", { order: orders });
 }
 
 module.exports = { getAllmenu, getMenuList, showCart, checkoutPage, placeorder };

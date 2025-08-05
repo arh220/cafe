@@ -39,16 +39,16 @@
                     <div class="section-title">Customer Details</div>
                     <div class="info-row">
                         <p><strong>Name:</strong>
-                            <%= orders.name %>
+                            <%= order.name %>
                         </p>
                         <p><strong>Email:</strong>
-                            <%= orders.email %>
+                            <%= order.email %>
                         </p>
                         <p><strong>Phone:</strong>
-                            <%= orders.mo %>
+                            <%= order.mo %>
                         </p>
                         <p><strong>Address:</strong>
-                            <%= orders.addre %>, <%= orders.city %> - <%= orders.pincode %>
+                            <%= order.stnm %>,<%= order.apnm %>, <%= order.city %> - <%= order.pin %>
                         </p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <% orders.cartItem.forEach(item=> { %>
+                                <% order.cartItem.forEach(item=> { %>
                                     <tr class="align-middle text-white">
                                         <td>
                                             <%= item.itemname %>
@@ -83,17 +83,17 @@
                             <tfoot>
                                 <tr class="align-middle text-white">
                                     <td colspan="3" class="text-end fw-semibold">Subtotal</td>
-                                    <td>₹<%= orders.subtotal.toFixed(2) %>
+                                    <td>₹<%= order.subtotal.toFixed(2) %>
                                     </td>
                                 </tr>
                                 <tr class="align-middle text-white">
                                     <td colspan="3" class="text-end fw-semibold">Shipping</td>
-                                    <td>₹<%= orders.deliveryCharge.toFixed(2) %>
+                                    <td>₹<%= order.deliveryCharge.toFixed(2) %>
                                     </td>
                                 </tr>
                                 <tr class="table-success">
                                     <td colspan="3" class="text-end fw-bold">Grand Total</td>
-                                    <td>₹<%= orders.grandTotal.toFixed(2) %>
+                                    <td>₹<%= order.grandTotal.toFixed(2) %>
                                     </td>
                                 </tr>
                             </tfoot>
