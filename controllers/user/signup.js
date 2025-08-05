@@ -16,6 +16,6 @@ async function signupUser(req, res) {
     gender,
     image: `/images/allimages/${req.file?.filename || "default.png"}`
   });
-  res.render("signin");
+  res.redirect("/signin");
 }
 module.exports = { signupUser };
