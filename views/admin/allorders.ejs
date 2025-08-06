@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+        <title>Admin</title>
+
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Dashboard</h2>
+                <div class="container mt-5">
+                    <h2 class="mb-4 text-center">All Customer Orders</h2>
+
+                    <% allOrders.forEach((order, index)=> { %>
+                        <div class="card shadow-lg mb-5">
+                            <div
+                                class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Order #<%= index + 1 %>
+                                </h5>
+                                <span><i class="bi bi-calendar-event"></i>
+                                    <%= order.createdAt.toLocaleDateString() %>
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <!-- Customer Info -->
+                                    <div class="col-md-6">
+                                        <h6 class="text-secondary mb-3">Customer Info</h6>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><strong>Name:</strong>
+                                                <%= order.name %>
+                                            </li>
+                                            <li class="list-group-item"><strong>Email:</strong>
+                                                <%= order.email %>
+                                            </li>
+                                            <li class="list-group-item"><strong>Mobile:</strong>
+                                                <%= order.mo %>
+                                            </li>
+                                            <li class="list-group-item"><strong>Address:</strong>
+                                                <%= order.stnm %>, <%= order.apnm %>, <%= order.city %> - <%= order.pin
+                                                                %>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Order Summary -->
+                                    <div class="col-md-6">
+                                        <h6 class="text-secondary mb-3">Order Summary</h6>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><strong>Subtotal:</strong> ₹<%=
+                                                    order.subtotal.toFixed(2) %>
+                                            </li>
+                                            <li class="list-group-item"><strong>Shipping:</strong> ₹<%=
+                                                    order.deliveryCharge.toFixed(2) %>
+                                            </li>
+                                            <li class="list-group-item"><strong>Total:</strong> ₹<%=
+                                                    order.grandTotal.toFixed(2) %>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Ordered Products Table -->
+                                <h6 class="text-secondary mb-3">Ordered Products</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Product Name</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% order.cartItem.forEach((item, i)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= i + 1 %>
+                                                    </td>
+                                                    <td>
+                                                        <%= item.itemname %>
+                                                    </td>
+                                                    <td>
+                                                        <%= item.qty %>
+                                                    </td>
+                                                    <td>₹<%= item.price.toFixed(2) %>
+                                                    </td>
+                                                    <td>₹<%= item.total.toFixed(2) %>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+
+            </div>
+        </main>
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+</body>
+
+</html>

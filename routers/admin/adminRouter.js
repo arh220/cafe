@@ -9,6 +9,7 @@ const {
   deleteMenuItem
 } = require("../../controllers/admin/menu");
 const upload = require("../../utils/multer");
+const allorders = require("../../controllers/admin/allorders");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -27,5 +28,6 @@ router.get("/manuitems", getAllMenuItems);
 router.get("/edititem/:id", editMenupg);
 router.post("/updateitem/:id", upload.single("image"), updateMenuItem);
 router.get("/delitem/:id", deleteMenuItem);
+router.get("/allorders", allorders);
 
 module.exports = router;
