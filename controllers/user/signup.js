@@ -2,6 +2,7 @@ const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const uploadImage = require("../../utils/uploadimage");
 const fs = require("fs");
+const sendMail = require("../../utils/nodemailer");
 
 async function signupUser(req, res) {
   const { name, email, pass, mo, city, dob, gender } = req.body;
@@ -22,6 +23,8 @@ async function signupUser(req, res) {
     image: secure_url,
     imageId: public_id
   });
+  await sendMail(email, "welcome to oure website", `Hi, ${name} Thank you for registring! `);
+
   res.redirect("/signin");
 }
 module.exports = { signupUser };

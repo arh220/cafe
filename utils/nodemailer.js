@@ -1,20 +1,23 @@
 const nodemailer = require("nodemailer");
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  secure: true, // true for 465, false for other ports
+  secure: true,
   auth: {
     user: "aradhana.webmigrates@gmail.com",
-    pass: ""
+    pass: "ypbhsfrdakgaerry"
   }
 });
+
 async function sendMail(to, subject, text, html) {
   const info = await transporter.sendMail({
-    from: "aradhana.webmigrates@gmail.com",
+    from: '"LEEZEE CAFE" <aradhana.webmigrates@gmail.com>',
     to,
     subject,
     text,
     html
   });
-  console.log("Message sent:", info.messageId);
+  // console.log("Message sent:", info.messageId);
 }
+
 module.exports = sendMail;

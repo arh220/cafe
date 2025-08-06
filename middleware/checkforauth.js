@@ -9,10 +9,12 @@ function checkForAuthCookie(cookiename) {
     try {
       const userpayload = validateToken(tokencookievalue);
       req.user = userpayload;
+      res.locals.user = userpayload;
     } catch (error) {}
     return next();
   };
 }
+
 function requiredAuth(req, res, next) {
   if (!req.user) {
     return res.render("signin", { error: "You Must be Logged in" });

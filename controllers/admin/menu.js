@@ -21,7 +21,7 @@ async function createMenuItem(req, res) {
     image: secure_url,
     imageId: public_id
   });
-  res.redirect("/admin/menupg");
+  res.redirect("/admin/menupg",);
 }
 async function getAllMenuItems(req, res) {
   const allMenuItems = await Menu.find().populate("catid");

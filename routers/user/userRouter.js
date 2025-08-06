@@ -3,6 +3,7 @@ const { signupUser } = require("../../controllers/user/signup");
 const signinUser = require("../../controllers/user/signin");
 const upload = require("../../utils/multer");
 const { getAllmenu, getMenuList, showCart, checkoutPage, placeorder } = require("../../controllers/user/menu");
+const { requiredAuth } = require("../../middleware/checkforauth");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -34,7 +35,7 @@ router.post("/signin", signinUser);
 router.get("/signout", (req, res) => {
   return res.clearCookie("token").redirect("/");
 });
-router.get("/cart", showCart);
+router.get("/cart", requiredAuth, showCart);
 router.get("/checkout", checkoutPage);
 router.post("/placeorder", placeorder);
 

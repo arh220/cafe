@@ -129,10 +129,14 @@
 
     document.addEventListener("DOMContentLoaded", renderCartFromLocalStorage);
 </script>
+
+
 <script>
+    // ✅ Function to add item to cart
     function addToCart(newItem) {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+        // Check if item already exists
         const existing = cart.find(item => item.id === newItem.id);
         if (existing) {
             existing.qty += newItem.qty;
@@ -143,10 +147,50 @@
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount(); // Update cart badge
         alert("Product added to cart!");
-        window.location.href = "/cart";  // auto-redirect to cart
+        window.location.href = "/cart"; // Redirect to cart page
     }
+
+    // ✅ Function to update cart count badge
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Remove items with qty <= 0 from cart
+        cart = cart.filter(item => item.qty > 0);
+
+        // Save filtered cart back to localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Calculate total qty
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+
+        const bag = document.getElementById("cart-bag");
+        if (!bag) return;
+
+        // Clear existing content
+        bag.innerHTML = "";
+
+        // Show badge even if count = 0
+        const badge = document.createElement("small");
+        badge.id = "cart-count";
+        badge.textContent = count;  // Shows 0 if empty
+        badge.className = "cart-count-badge";
+        bag.appendChild(badge);
+    }
+
+    // ✅ Call on page load
+    document.addEventListener("DOMContentLoaded", updateCartCount);
 </script>
+
+
+
+
+
+<!-- cart icon notification count -->
+
+
+
 <script>
     function renderCheckout() {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];

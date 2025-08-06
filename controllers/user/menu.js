@@ -1,11 +1,13 @@
 const Menu = require("../../models/admin/menu");
 const Menucategory = require("../../models/admin/menucat");
 const Order = require("../../models/order");
+const generateOrderConfirmationEmail = require("../../utils/emailmsg");
+const sendMail = require("../../utils/nodemailer");
 
 async function getAllmenu(req, res) {
   const allmenu = await Menu.find().populate("catid");
   const allcat = await Menucategory.find();
-  res.render("product", { allmenu, allcat });
+  res.render("product", { allmenu, allcat, user: req.user || null });
 }
 async function getMenuList(req, res) {
   const allmenu = await Menu.find().populate("catid");
@@ -22,12 +24,12 @@ async function checkoutPage(req, res) {
 }
 async function placeorder(req, res) {
   const { name, mo, email, stnm, apnm, city, pin, payment, cartData } = req.body;
-  // console.log(req.body);
 
   let cartItems = [];
   if (cartData) {
     cartItems = JSON.parse(cartData);
   }
+
   const subtotal = cartItems.reduce((sum, item) => sum + (item.total || 0), 0);
   const deliveryCharge = 50;
   const grandTotal = subtotal + deliveryCharge;
@@ -48,6 +50,12 @@ async function placeorder(req, res) {
   });
 
   const orders = await newOrder.save();
+
+  const htmlEmail = generateOrderConfirmationEmail(orders);
+
+  console.log("Email HTML:", htmlEmail); // <-- Debug to see HTML content
+
+  await sendMail(email, "Order Confirmation", `Hi ${name}, thank you for your order.`, htmlEmail);
 
   res.render("ordersucsess", { order: orders });
 }

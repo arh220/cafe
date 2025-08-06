@@ -77,16 +77,24 @@
                                                                     <%= prod.disc %>
                                                                 </p>
                                                                 <p class="price"><span>₹<%= prod.mrp %></span></p>
-                                                                <p><a href="/cart"
-                                                                        class="btn btn-primary btn-outline-primary"
-                                                                        onclick='addToCart({
-     id: "<%= prod._id %>",
-     itemname: "<%= prod.itemname %>",
-     price: "<%= prod.mrp %>",
-     image: "<%= prod.image %>",
-     qty: 1
-   }); return true;'>Add to cart</a>
-                                                                </p>
+                                                                <% if (user) { %>
+                                                                    <p><a href="/cart"
+                                                                            class="btn btn-primary btn-outline-primary"
+                                                                            onclick='addToCart({
+          id: "<%= prod._id %>",
+          itemname: "<%= prod.itemname %>",
+          price: "<%= prod.mrp %>",
+          image: "<%= prod.image %>",
+          qty: 1
+        }); return true;'>Add to cart</a>
+                                                                    </p>
+                                                                    <% } else { %>
+                                                                        <p><a href="/signin"
+                                                                                class="btn btn-primary btn-outline-primary">
+                                                                                Login to Add
+                                                                            </a></p>
+                                                                        <% } %>
+
                                                             </div>
                                                         </div>
                                                     </div>
