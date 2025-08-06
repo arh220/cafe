@@ -3,40 +3,40 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true
+      required: true
     },
     email: {
       type: String,
       uniqe: true,
-      require: true
+      required: true
     },
     pass: {
       type: String,
-      require: true
+      required: true
     },
     mo: {
       type: Number,
-      require: true
+      required: true
     },
     city: {
       type: String,
-      require: true
+      required: true
     },
     dob: {
       type: String,
-      require: true
+      required: true
     },
     image: {
       type: String,
-      require: true
+      required: true
     },
     imageId: {
       type: String,
-      require: true
+      required: true
     },
     gender: {
       type: String,
-      require: true
+      required: true
     },
     role: {
       type: String,
