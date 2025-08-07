@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
-
-secretkey = "@arh123+";
+const JWT_SECRET = process.env.JWT_SECRET;
 function createTokenForUser(signinuser) {
   const payload = {
     _id: signinuser._id,
@@ -8,11 +7,8 @@ function createTokenForUser(signinuser) {
     image: signinuser.image,
     role: signinuser.role
   };
-  const token = jwt.sign(payload, secretkey);
+  const token = jwt.sign(payload, JWT_SECRET);
   return token;
 }
-function validateToken(token) {
-  const payload = jwt.verify(token, secretkey);
-  return payload;
-}
-module.exports = { createTokenForUser, validateToken };
+
+module.exports = { createTokenForUser };

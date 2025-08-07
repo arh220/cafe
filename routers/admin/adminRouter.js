@@ -10,23 +10,32 @@ const {
 } = require("../../controllers/admin/menu");
 const upload = require("../../utils/multer");
 const allorders = require("../../controllers/admin/allorders");
-const { signUpAdminUser, signinAdminUser } = require("../../controllers/admin/signup");
+const { signUpAdminUser, signinAdminUser, signupUserList, signUpAdminUserList } = require("../../controllers/admin/signup");
+const setAdminUser = require("../../middleware/adminlogin");
 const router = express.Router();
 
 router.get("/", (req, res) => {
   res.render("admin/signin", { error: null });
 });
-router.get("/home", (req, res) => {
-  render("admin/home");
-});
-router.get("/signup", (req, res) => {
-  res.render("admin/signup", { error: null });
-});
+
 router.get("/signin", (req, res) => {
-  res.render("admin/signin", { error: null });
+  res.render("admin/signin", { error: null, adminuser: null });
 });
 router.post("/signin", signinAdminUser);
+router.get("/signup", (req, res) => {
+  res.render("admin/signup", { error: null, adminuser: null });
+});
 router.post("/signup", upload.single("image"), signUpAdminUser);
+
+router.use(setAdminUser);
+router.get("/signout", (req, res) => {
+  res.clearCookie("token").redirect("/admin/signin");
+});
+router.get("/home", (req, res) => {
+  res.render("admin/home", { error: null });
+});
+router.get("/signupuser", signupUserList);
+router.get("/signupadminuser", signUpAdminUserList);
 router.get("/menucatpg", (req, res) => {
   res.render("admin/menucatpg");
 });

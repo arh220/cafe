@@ -11,7 +11,9 @@
                     <span class="icon logo" aria-hidden="true"></span>
                     <div class="logo-text">
                         <span class="logo-title">Cafe</span>
-                        <span class="logo-subtitle">Admin</span>
+                        <span class="logo-subtitle">
+                            <%= adminuser?.name || '' %>
+                        </span>
                     </div>
 
                 </a>
@@ -23,7 +25,8 @@
             <div class="sidebar-body">
                 <ul class="sidebar-body-menu">
                     <li>
-                        <a class="active" href="/admin"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                        <a class="active" href="/admin/home"><span class="icon home"
+                                aria-hidden="true"></span>Dashboard</a>
                     </li>
 
                     <li>
@@ -134,10 +137,10 @@
                         </a>
                         <ul class="cat-sub-menu">
                             <li>
-                                <a href="users-01.html">Users-01</a>
+                                <a href="/admin/signupuser">SignUp users</a>
                             </li>
                             <li>
-                                <a href="users-02.html">Users-02</a>
+                                <a href="/admin/signupadminuser">SignUp Admin Users</a>
                             </li>
                         </ul>
                     </li>
@@ -152,18 +155,21 @@
             </div>
         </div>
         <div class="sidebar-footer">
-            <a href="##" class="sidebar-user">
+            <div class="sidebar-user">
                 <span class="sidebar-user-img">
                     <picture>
-                        <source srcset="/img/avatar/avatar-illustrated-01.webp" type="image/webp"><img
-                            src="/img/avatar/avatar-illustrated-01.png" alt="User name">
+                        <source type="image/webp"><img src="<%= adminuser?.image || '' %>" alt="User name">
                     </picture>
                 </span>
                 <div class="sidebar-user-info">
-                    <span class="sidebar-user__title">Nafisa Sh.</span>
-                    <span class="sidebar-user__subtitle">Support manager</span>
+                    <span class="sidebar-user__title">
+                        <%= adminuser?.name || '' %>
+                    </span>
+                    <span class="sidebar-user__subtitle">
+                        <%= adminuser?.email || '' %>
+                    </span>
                 </div>
-            </a>
+            </div>
         </div>
     </aside>
     <div class="main-wrapper">
@@ -184,17 +190,7 @@
                         <span class="sr-only">Toggle menu</span>
                         <span class="icon menu-toggle--gray" aria-hidden="true"></span>
                     </button>
-                    <div class="lang-switcher-wrapper">
-                        <button class="lang-switcher transparent-btn" type="button">
-                            EN
-                            <i data-feather="chevron-down" aria-hidden="true"></i>
-                        </button>
-                        <ul class="lang-menu dropdown">
-                            <li><a href="##">English</a></li>
-                            <li><a href="##">French</a></li>
-                            <li><a href="##">Uzbek</a></li>
-                        </ul>
-                    </div>
+
                     <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
                         <span class="sr-only">Switch theme</span>
                         <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
@@ -254,23 +250,24 @@
                             <span class="sr-only">My profile</span>
                             <span class="nav-user-img">
                                 <picture>
-                                    <source srcset="/img/avatar/avatar-illustrated-02.webp" type="image/webp"><img
-                                        src="/img/avatar/avatar-illustrated-02.png" alt="User name">
+                                    <source type="image/webp"><img src="<%= adminuser?.image || '' %>" alt="">
                                 </picture>
                             </span>
                         </button>
                         <ul class="users-item-dropdown nav-user-dropdown dropdown">
                             <li><a href="##">
                                     <i data-feather="user" aria-hidden="true"></i>
-                                    <span>Profile</span>
+                                    <span>
+                                        <%= adminuser?.email || '' %>
+                                    </span>
                                 </a></li>
                             <li><a href="##">
                                     <i data-feather="settings" aria-hidden="true"></i>
                                     <span>Account settings</span>
                                 </a></li>
-                            <li><a class="danger" href="##">
+                            <li><a class="danger" href="/admin/signout">
                                     <i data-feather="log-out" aria-hidden="true"></i>
-                                    <span>Log out</span>
+                                    <span>Sign out</span>
                                 </a></li>
                         </ul>
                     </div>
