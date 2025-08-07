@@ -99,35 +99,38 @@
                     </div>
                     <div class="book p-4">
                         <h3>Book a Table</h3>
-                        <form action="#" class="appointment-form">
+                        <form action="/booktable" method="post" class="appointment-form">
                             <div class="d-md-flex">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name">
+                                    <input type="text" name="name" class="form-control" placeholder="Name">
                                 </div>
                                 <div class="form-group ml-md-4">
-                                    <input type="text" class="form-control" placeholder="Member">
+                                    <input type="text" name="member" class="form-control" placeholder="Member">
                                 </div>
                             </div>
                             <div class="d-md-flex">
                                 <div class="form-group">
                                     <div class="input-wrap">
                                         <div class="icon"><span class="ion-md-calendar"></span></div>
-                                        <input type="text" class="form-control appointment_date" placeholder="Date">
+                                        <input type="text" name="date" class="form-control appointment_date"
+                                            placeholder="Date">
                                     </div>
                                 </div>
                                 <div class="form-group ml-md-4">
                                     <div class="input-wrap">
                                         <div class="icon"><span class="ion-ios-clock"></span></div>
-                                        <input type="text" class="form-control appointment_time" placeholder="Time">
+                                        <input type="text" name="time" class="form-control appointment_time"
+                                            placeholder="Time">
                                     </div>
                                 </div>
                                 <div class="form-group ml-md-4">
-                                    <input type="text" class="form-control" placeholder="Phone">
+                                    <input type="text" name="mo" class="form-control" placeholder="Mobile"
+                                        maxlength="10" pattern="[0-9]{10}" id="mobile">
                                 </div>
                             </div>
                             <div class="d-md-flex">
                                 <div class="form-group">
-                                    <textarea name="" id="" cols="30" rows="2" class="form-control"
+                                    <textarea name="msg" id="" cols="30" rows="2" class="form-control"
                                         placeholder="Message"></textarea>
                                 </div>
                                 <div class="form-group ml-md-4">

@@ -4,6 +4,7 @@ const signinUser = require("../../controllers/user/signin");
 const upload = require("../../utils/multer");
 const { getAllmenu, getMenuList, showCart, checkoutPage, placeorder } = require("../../controllers/user/menu");
 const { requiredAuth } = require("../../middleware/checkforauth");
+const bookTable = require("../../controllers/user/booktbl");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -18,8 +19,8 @@ router.get("/services", (req, res) => {
 router.get("/blog", (req, res) => {
   res.render("blog");
 });
-router.get("/about", (req, res) => {
-  res.render("about");
+router.get("/gallery", (req, res) => {
+  res.render("gallery");
 });
 router.get("/contact", (req, res) => {
   res.render("contact");
@@ -38,5 +39,6 @@ router.get("/signout", (req, res) => {
 router.get("/cart", requiredAuth, showCart);
 router.get("/checkout", checkoutPage);
 router.post("/placeorder", placeorder);
+router.post("/booktable", requiredAuth, bookTable);
 
 module.exports = router;

@@ -10,5 +10,12 @@ function createTokenForUser(signinuser) {
   const token = jwt.sign(payload, JWT_SECRET);
   return token;
 }
+function validateToken(token) {
+  try {
+    return jwt.verify(token, JWT_SECRET);
+  } catch (error) {
+    throw new Error("Invalid Token");
+  }
+}
 
-module.exports = { createTokenForUser };
+module.exports = { createTokenForUser, validateToken };

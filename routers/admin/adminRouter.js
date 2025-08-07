@@ -12,6 +12,7 @@ const upload = require("../../utils/multer");
 const allorders = require("../../controllers/admin/allorders");
 const { signUpAdminUser, signinAdminUser, signupUserList, signUpAdminUserList } = require("../../controllers/admin/signup");
 const setAdminUser = require("../../middleware/adminlogin");
+const { allBookingTable, tableDetailsDelete } = require("../../controllers/admin/allbooktable");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -50,5 +51,7 @@ router.get("/edititem/:id", editMenupg);
 router.post("/updateitem/:id", upload.single("image"), updateMenuItem);
 router.get("/delitem/:id", deleteMenuItem);
 router.get("/allorders", allorders);
+router.get("/booktable", allBookingTable);
+router.get("/deltbl/:id", tableDetailsDelete);
 
 module.exports = router;
