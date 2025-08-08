@@ -95,9 +95,9 @@
                         </ul>
                     </li>
 
-                    <!-- <li>
+                    <li>
                         <a class="show-cat-btn" href="##">
-                            <span class="icon image" aria-hidden="true"></span>Media
+                            <span class="icon image" aria-hidden="true"></span>Gallery
                             <span class="category__btn transparent-btn" title="Open list">
                                 <span class="sr-only">Open list</span>
                                 <span class="icon arrow-down" aria-hidden="true"></span>
@@ -105,29 +105,31 @@
                         </a>
                         <ul class="cat-sub-menu">
                             <li>
-                                <a href="media-01.html">Media-01</a>
+                                <a href="/admin/addgalleryimg">Add image</a>
                             </li>
                             <li>
-                                <a href="media-02.html">Media-02</a>
+                                <a href="/admin/allgalleryimg">All image</a>
                             </li>
                         </ul>
-                    </li> -->
-                    <!-- <li>
-                        <a href="comments.html">
+                    </li>
+                    <li>
+                        <a href="/admin/comments">
                             <span class="icon message" aria-hidden="true"></span>
                             Comments
                         </a>
-                        <span class="msg-counter">7</span>
-                    </li> -->
+                        <span class="msg-counter">
+                            <%= allcoments.length %>
+                        </span>
+                    </li>
                 </ul>
                 <span class="system-menu__title">system</span>
                 <ul class="sidebar-body-menu">
                     <!-- <li>
                         <a href="appearance.html"><span class="icon edit" aria-hidden="true"></span>Appearance</a>
                     </li> -->
-                    <!-- <li>
+                    <li>
                         <a class="show-cat-btn" href="##">
-                            <span class="icon category" aria-hidden="true"></span>Extentions
+                            <span class="icon category" aria-hidden="true"></span>Blog
                             <span class="category__btn transparent-btn" title="Open list">
                                 <span class="sr-only">Open list</span>
                                 <span class="icon arrow-down" aria-hidden="true"></span>
@@ -135,13 +137,13 @@
                         </a>
                         <ul class="cat-sub-menu">
                             <li>
-                                <a href="extention-01.html">Extentions-01</a>
+                                <a href="/admin/blogpage">Create blog</a>
                             </li>
                             <li>
-                                <a href="extention-02.html">Extentions-02</a>
+                                <a href="/admin/allblog">All Blog</a>
                             </li>
                         </ul>
-                    </li> -->
+                    </li>
                     <li>
                         <a class="show-cat-btn" href="##">
                             <span class="icon user-3" aria-hidden="true"></span>Users

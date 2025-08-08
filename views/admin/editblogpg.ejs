@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+        <title>Admin</title>
+        <style>
+            .form-check-input {
+                border: 2px solid #1c1e20 !important;
+                box-shadow: none !important;
+
+            }
+
+            .form-check-input:checked {
+                background-color: #1c1e20 !important;
+                border-color: #1c1e20 !important;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+
+
+        <main class="main users chart-page" id="skip-target">
+            <div class="container py-4">
+                <h2 class="main-title">Dashboard</h2>
+
+                <div class="card shadow rounded mx-auto" style="max-width: 800px; ">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Create Blog</h3>
+                        <form action="/admin/updateblog/<%= selectblog._id %>" method="post"
+                            enctype="multipart/form-data">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Title<sup>*</sup></label>
+                                    <input type="text" name="title" value="<%= selectblog.title %>"
+                                        class="form-control shadow-sm border border-secondary">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">Discription<sup>*</sup></label>
+                                    <input type="text" name="disc" value="<%= selectblog.disc %>"
+                                        class="form-control shadow-sm border border-secondary">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">Upload new Blog Image<sup>*</sup></label>
+                                    <input type="file" name="image"
+                                        class="form-control shadow-sm border border-secondary">
+                                </div>
+                                <div style="margin-top: 5px;">
+                                    <p>Current Image:</p>
+                                    <img src="<%= selectblog.image %>" alt="Product Image"
+                                        style="max-width: 80px; border-radius: 6px;">
+                                </div>
+                                <div class="col-md-12 text-center mt-3">
+                                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+</body>
+
+</html>

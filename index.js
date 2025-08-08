@@ -6,7 +6,7 @@ const userRouter = require("./routers/user/userRouter");
 const adminRouter = require("./routers/admin/adminRouter");
 const { error } = require("console");
 const cookieParser = require("cookie-parser");
-const { everypageinuser } = require("./middleware/globaldata");
+const { everypageinuser, allcomentsInEveryPage } = require("./middleware/globaldata");
 const { checkForAuthCookie } = require("./middleware/checkforauth");
 const session = require("express-session");
 const { cloudinaryConfig } = require("./utils/cloudinary");
@@ -35,7 +35,7 @@ app.use(
   })
 );
 app.use(checkForAuthCookie("token"));
-app.use(everypageinuser);
+app.use(everypageinuser, allcomentsInEveryPage);
 
 app.use("/", userRouter);
 app.use("/admin", adminRouter);

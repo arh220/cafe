@@ -1,0 +1,77 @@
+!
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+        <title>Admin</title>
+        <style>
+            .posts-table td,
+            .posts-table th {
+                white-space: nowrap;
+                /* columns compact */
+            }
+
+            .categories-table-img img {
+                max-width: 60px;
+                height: 60px;
+                object-fit: cover;
+            }
+        </style>
+
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Dashboard</h2>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <div class="users-table table-wrapper">
+                            <table
+                                class="posts-table table table-bordered table-striped w-auto text-center align-middle">
+                                <thead>
+                                    <tr class="users-table-info">
+                                        <th>No</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (allGalleryImages && allGalleryImages.length> 0) { %>
+                                        <% allGalleryImages.forEach((item, index)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= index + 1 %>
+                                                </td>
+                                                <td class="p-1">
+                                                    <div class="categories-table-img">
+                                                        <img src="<%= item.image %>" alt="category">
+                                                    </div>
+                                                </td>
+                                                <td class="p-1">
+                                                    <a href="/admin/deleteimg/<%= item._id %>"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+</body>
+
+</html>

@@ -9,4 +9,4 @@ async function uploadImage(imagepath) {
 async function deleteImageFromCloudinary(imageId) {
   await cloudinary.uploader.destroy(imageId);
 }
-(module.exports = uploadImage), deleteImageFromCloudinary;
+module.exports = { uploadImage, deleteImageFromCloudinary };

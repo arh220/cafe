@@ -5,6 +5,8 @@ const upload = require("../../utils/multer");
 const { getAllmenu, getMenuList, showCart, checkoutPage, placeorder } = require("../../controllers/user/menu");
 const { requiredAuth } = require("../../middleware/checkforauth");
 const bookTable = require("../../controllers/user/booktbl");
+const getImageIngallery = require("../../controllers/user/gallery");
+const { getAllBlogs, getBlogMoreDetails, leaveComment } = require("../../controllers/user/blog");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -16,12 +18,10 @@ router.get("/product", getAllmenu);
 router.get("/services", (req, res) => {
   res.render("services");
 });
-router.get("/blog", (req, res) => {
-  res.render("blog");
-});
-router.get("/gallery", (req, res) => {
-  res.render("gallery");
-});
+router.get("/blog", getAllBlogs);
+router.get("/blogdetails/:id", getBlogMoreDetails);
+router.post("/comment/:id", leaveComment);
+router.get("/gallery", getImageIngallery);
 router.get("/contact", (req, res) => {
   res.render("contact");
 });
