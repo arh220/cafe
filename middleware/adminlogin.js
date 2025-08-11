@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 async function setAdminUser(req, res, next) {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.admintoken;
     if (token) {
       const decoded = jwt.verify(token, JWT_SECRET);
       const user = await User.findById(decoded._id);

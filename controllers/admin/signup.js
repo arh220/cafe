@@ -44,7 +44,7 @@ async function signinAdminUser(req, res) {
     }
 
     const token = createTokenForUser(adminuser);
-    res.cookie("token", token).redirect("/admin/home");
+    res.cookie("admintoken", token, { httpOnly: true }).redirect("/admin/home");
   } catch (err) {
     console.error(err);
     return res.status(500).render("admin/signin", { error: "Something went wrong." });

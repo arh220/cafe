@@ -1,6 +1,8 @@
 const { createTokenForUser } = require("../../middleware/auth");
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
+
+
 async function signinUser(req, res) {
   const { email, pass } = req.body;
   const signinUser = await User.findOne({ email });
@@ -13,6 +15,6 @@ async function signinUser(req, res) {
     return res.render("signin", { error: "Incorrect Password..." });
   }
   const token = createTokenForUser(signinUser);
-  return res.cookie("token", token).redirect("/");
+  return res.cookie("usertoken", token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24, sameSite: "lax" }).redirect("/");
 }
 module.exports = signinUser;

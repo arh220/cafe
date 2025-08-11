@@ -34,7 +34,9 @@ app.use(
     }
   })
 );
-app.use(checkForAuthCookie("token"));
+app.use(checkForAuthCookie("usertoken", "user"));
+app.use(checkForAuthCookie("admintoken", "admin"));
+
 app.use(everypageinuser, allcomentsInEveryPage);
 
 app.use("/", userRouter);

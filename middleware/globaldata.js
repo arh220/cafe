@@ -1,7 +1,7 @@
 const Comment = require("../models/comment");
 
 function everypageinuser(req, res, next) {
-  res.locals.user = req.user;
+  res.locals.user = req.user || null;
   next();
 }
 async function allcomentsInEveryPage(req, res, next) {

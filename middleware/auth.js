@@ -5,7 +5,7 @@ function createTokenForUser(signinuser) {
     _id: signinuser._id,
     email: signinuser.email,
     image: signinuser.image,
-    role: signinuser.role
+    role: signinuser.role.toLowerCase()
   };
   const token = jwt.sign(payload, JWT_SECRET);
   return token;
