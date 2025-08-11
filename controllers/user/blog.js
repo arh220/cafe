@@ -1,5 +1,5 @@
 const Blog = require("../../models/admin/blog");
-const { Comment } = require("../../models/comment");
+const Comment = require("../../models/comment");
 
 async function getAllBlogs(req, res) {
   const allblogs = await Blog.find().sort({ createdAt: -1 });
@@ -7,7 +7,7 @@ async function getAllBlogs(req, res) {
 }
 async function getBlogMoreDetails(req, res) {
   const selectedblog = await Blog.findById(req.params.id);
-  const allcoments = await Comment.find().sort({ createdAt: -1 });
+  const allcoments = await Comment.find({ blogId: req.params.id }).sort({ createdAt: -1 });
   res.render("blogmoredetails", { selectedblog, allcoments });
 }
 async function leaveComment(req, res) {
