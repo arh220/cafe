@@ -33,7 +33,7 @@ router.post("/signup", upload.single("image"), signUpAdminUser);
 
 router.use(setAdminUser);
 router.get("/signout", (req, res) => {
-  res.clearCookie("token").redirect("/admin/signin");
+  res.clearCookie("admintoken").redirect("/admin/signin");
 });
 router.get("/home", (req, res) => {
   res.render("admin/home", { error: null });

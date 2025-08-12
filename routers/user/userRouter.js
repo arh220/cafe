@@ -34,7 +34,7 @@ router.get("/signin", (req, res) => {
 });
 router.post("/signin", signinUser);
 router.get("/signout", (req, res) => {
-  return res.clearCookie("token").redirect("/");
+  return res.clearCookie("usertoken").redirect("/");
 });
 router.get("/cart", requiredAuth, showCart);
 router.get("/checkout", checkoutPage);
